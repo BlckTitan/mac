@@ -10,6 +10,14 @@ const AUTHOR_SCHEMA = new MONGOOSE.Schema({
         type: String,
         required: true,
         default: 'Publisher'
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
     }
 })
 

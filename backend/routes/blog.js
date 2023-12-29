@@ -1,10 +1,12 @@
 const { error } = require('console')
 const EXPRESS = require('express')
 const router = EXPRESS.Router()
+const BLOG_MODEL = require('../model/blogModel')
 
 //get all blogs
 router.get('/', (req, res) => {
-    res.send('this route works')
+    const BLOG = BLOG_MODEL.find()
+    res.send(BLOG)
 })
 
 //post to blog
