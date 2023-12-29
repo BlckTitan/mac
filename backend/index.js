@@ -5,6 +5,8 @@ require('dotenv').config()
 require('winston-mongodb')
 
 
+//error logging
+require('./startup/logging')()
 //routing
 require('./startup/route')(APP)
 require('./startup/db')()
