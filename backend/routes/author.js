@@ -3,14 +3,14 @@ const EXPRESS = require('express')
 const router = EXPRESS.Router()
 const AUTHOR_MODEL = require('../model/authorModel')
 
-//get all blogs
+//get all author
 router.get('/', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.find()
     .select('name role')
     res.send(AUTHOR)
 })
 
-//get blog by id
+//get author by id
 router.get('/:id', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.findById(req.params.id)
     .select('name role')
@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     res.send(AUTHOR)
 })
 
-//post to blog
+//post to author
 router.post('/', async (req, res) => {
 
     const RESULT = validateRequest(req.body)
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     res.send(newAuthor)
 })
 
-//update a blog
+//update a author
 router.put('/:id', async (req, res) => {
 
     const RESULT = validateRequest(req.body)
@@ -62,7 +62,7 @@ router.put('/:id', async (req, res) => {
     res.send(updatedUser)
 })
 
-//delete a blog
+//delete a author
 router.delete('/:id', async (req, res) => {
 
     const AUTHOR = await AUTHOR_MODEL.findByIdAndDelete({_id: req.params.id})
