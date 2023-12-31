@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 
     const TOKEN = EXISTING_AUTHOR.generateAuthToken()
 
-    res.header('x-auth-token', TOKEN).send(TOKEN)
+    res.header('x-auth-token', TOKEN).send(EXISTING_AUTHOR)
 })
 
 const validateRequest = (request) => {

@@ -7,6 +7,8 @@ const WINSTON = require('winston')
 //models
 const BLOG_MODEL = require('../model/blogModel')
 const AUTHOR_MODEL = require('../model/authorModel')
+//middleware
+const AUTH = require('../middleware/auth')
 
 // Fawn.init(MONGOOSE)
 
@@ -97,7 +99,7 @@ router.put('/:id', async (req, res) => {
 })
 
 //delete a blog
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [AUTH], async (req, res) => {
 
     const BLOG = await BLOG_MODEL.findByIdAndDelete({_id: req.params.id})
 

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 //get author by id
-router.get('/:id', async (req, res) => {
+router.get('/me', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.findById(req.params.id)
     .select('name role')
 
