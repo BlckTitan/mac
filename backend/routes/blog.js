@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //post to blog
-router.post('/', async (req, res) => {
+router.post('/', [AUTH], async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
@@ -55,17 +55,13 @@ router.post('/', async (req, res) => {
         }
     })
 
-    // new Fawn.Task()
-    // .save('blogs', newBlog)
-    // .run()
-
     newBlog = await newBlog.save()
 
     res.send(newBlog)
 })
 
 //update a blog
-router.put('/:id', async (req, res) => {
+router.put('/:id', [AUTH], async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
