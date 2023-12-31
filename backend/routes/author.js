@@ -1,6 +1,9 @@
 const Joi = require('joi')
 const EXPRESS = require('express')
 const router = EXPRESS.Router()
+const BCRYPT = require('bcrypt')
+
+//MODELS
 const AUTHOR_MODEL = require('../model/authorModel')
 
 //get all author
@@ -27,14 +30,25 @@ router.post('/', async (req, res) => {
 
     if(RESULT.error) return res.status(400).send(RESULT.error.details[0].message)
 
+    const EXISTING_AUTHOR = await AUTHOR_MODEL.findOne({email: req.body.email})
+    if(EXISTING_AUTHOR) return res.status(400).send('THIS USER ALREADY EXISTS')
+
     let newAuthor = new AUTHOR_MODEL({
         name: req.body.name,
-        role: req.body.role
+        role: req.body.role,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.password
     })
+
+    const SALT = await BCRYPT.genSalt(10)
+    newAuthor.password = await BCRYPT.hash(newAuthor.password, SALT)
 
     newAuthor = await newAuthor.save()
 
     res.send(newAuthor)
+
+    const TOKEN = newAuthor.generateAuthToken()
 })
 
 //update a author
@@ -51,12 +65,15 @@ router.put('/:id', async (req, res) => {
             name: req.body.name,
             role: req.body.role,
             email: req.body.email,
-            phone: req.body.phone
+            phone: req.body.phone,
+            password: req.body.password
         })
     } else{
         return res.status(404).send('THE REQUESTED AUTHOR WAS NOT FOUND')
     }
-
+    const SALT = await BCRYPT.genSalt(10)
+    newAuthor.password = await BCRYPT.hash(newAuthor.password, SALT)
+    
     updatedUser = await updatedUser.save()
 
     res.send(updatedUser)
@@ -78,7 +95,8 @@ const validateRequest = (request) => {
         name: Joi.string().min(5).max(50).required(),
         role: Joi.string(),
         email: Joi.string().required(),
-        phone: Joi.string().required()
+        phone: Joi.string().required(),
+        password: Joi.string().required()
     })
 
     return SCHEMA.validate(request)

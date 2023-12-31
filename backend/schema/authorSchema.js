@@ -18,6 +18,10 @@ const AUTHOR_SCHEMA = new MONGOOSE.Schema({
     phone: {
         type: String,
         required: true,
+    },
+    password: {
+        type: String,
+        required: true,
     }
 })
 
