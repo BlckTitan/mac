@@ -48,7 +48,6 @@ router.post('/', async (req, res) => {
 
     res.send(newAuthor)
 
-    const TOKEN = newAuthor.generateAuthToken()
 })
 
 //update a author

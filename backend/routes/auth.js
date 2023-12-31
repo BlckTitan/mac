@@ -1,4 +1,10 @@
+const Joi = require('joi')
+const EXPRESS = require('express')
+const router = EXPRESS.Router()
+const BCRYPT = require('bcrypt')
 
+//MODELS
+const AUTHOR_MODEL = require('../model/authorModel')
 //post to author
 router.post('/', async (req, res) => {
 
@@ -7,22 +13,24 @@ router.post('/', async (req, res) => {
     if(RESULT.error) return res.status(400).send(RESULT.error.details[0].message)
 
     const EXISTING_AUTHOR = await AUTHOR_MODEL.findOne({email: req.body.email})
-    if(EXISTING_AUTHOR) return res.status(400).send('THIS USER ALREADY EXISTS')
+    if(!EXISTING_AUTHOR) return res.status(400).send('INVALID EMAIL OR PASSWORD')
 
-    let newAuthor = new AUTHOR_MODEL({
-        name: req.body.name,
-        role: req.body.role,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: req.body.password
+    const EXISTING_PASSWORD = await BCRYPT.compare(req.body.password, EXISTING_AUTHOR.password)
+    if(!EXISTING_PASSWORD) return res.status(400).send('INVALID EMAIL OR PASSWORD')
+
+    const TOKEN = EXISTING_AUTHOR.generateAuthToken()
+
+    res.header('x-auth-token', TOKEN).send(TOKEN)
+})
+
+const validateRequest = (request) => {
+
+    const SCHEMA = Joi.object({
+        email: Joi.string().required(),
+        password: Joi.string().required()
     })
 
-    const SALT = await BCRYPT.genSalt(10)
-    newAuthor.password = await BCRYPT.hash(newAuthor.password, SALT)
+    return SCHEMA.validate(request)
+}
 
-    newAuthor = await newAuthor.save()
-
-    res.send(newAuthor)
-
-    const TOKEN = newAuthor.generateAuthToken()
-})
+module.exports = router
