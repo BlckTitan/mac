@@ -22,6 +22,10 @@ const AUTHOR_SCHEMA = new MONGOOSE.Schema({
     password: {
         type: String,
         required: true,
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 })
 

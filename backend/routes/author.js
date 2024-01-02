@@ -38,7 +38,8 @@ router.post('/', async (req, res) => {
         role: req.body.role,
         email: req.body.email,
         phone: req.body.phone,
-        password: req.body.password
+        password: req.body.password,
+        isAdmin: req.body.isAdmin
     })
 
     const SALT = await BCRYPT.genSalt(10)
@@ -65,7 +66,8 @@ router.put('/:id', async (req, res) => {
             role: req.body.role,
             email: req.body.email,
             phone: req.body.phone,
-            password: req.body.password
+            password: req.body.password,
+            isAdmin: req.body.isAdmin
         })
     } else{
         return res.status(404).send('THE REQUESTED AUTHOR WAS NOT FOUND')
@@ -95,7 +97,8 @@ const validateRequest = (request) => {
         role: Joi.string(),
         email: Joi.string().required(),
         phone: Joi.string().required(),
-        password: Joi.string().required()
+        password: Joi.string().required(),
+        isAdmin: Joi.boolean().required()
     })
 
     return SCHEMA.validate(request)
