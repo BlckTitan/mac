@@ -7,6 +7,9 @@ const WINSTON = require('winston')
 //models
 const BLOG_MODEL = require('../model/blogModel')
 const AUTHOR_MODEL = require('../model/authorModel')
+//middleware
+const AUTH = require('../middleware/auth')
+const ADMIN = require('../middleware/admin')
 
 // Fawn.init(MONGOOSE)
 
@@ -28,13 +31,13 @@ router.get('/:id', async (req, res) => {
 })
 
 //post to blog
-router.post('/', async (req, res) => {
+router.post('/', [AUTH], async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
     if(RESULT.error) return res.status(400).send(RESULT.error.details[0].message)
 
-    const AUTHOR = await AUTHOR_MODEL.findById({_id: '658ed94802d0ff65a7f6f30a'})
+    const AUTHOR = await AUTHOR_MODEL.findById({_id: '659139dafe1ef0bc2027806b'})
 
     if(!AUTHOR) return res.status(404).send('INVALID AUTHOR')
 
@@ -53,17 +56,13 @@ router.post('/', async (req, res) => {
         }
     })
 
-    // new Fawn.Task()
-    // .save('blogs', newBlog)
-    // .run()
-
     newBlog = await newBlog.save()
 
     res.send(newBlog)
 })
 
 //update a blog
-router.put('/:id', async (req, res) => {
+router.put('/:id', [AUTH], async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
@@ -97,7 +96,7 @@ router.put('/:id', async (req, res) => {
 })
 
 //delete a blog
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [AUTH, ADMIN], async (req, res) => {
 
     const BLOG = await BLOG_MODEL.findByIdAndDelete({_id: req.params.id})
 
@@ -109,7 +108,7 @@ router.delete('/:id', async (req, res) => {
 const validateRequest = (request) => {
 
     const SCHEMA = Joi.object({
-        name: Joi.string().min(5).max(50).required(),
+        // name: Joi.string().min(5).max(50).required(),
         title: Joi.string().min(5).max(50).required(),
         description: Joi.string().required(),
         tags: Joi.string().min(5),
