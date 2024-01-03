@@ -34,8 +34,8 @@ export default function CreatePostContent() {
           margin: '16px 0',
         }}
       >
-        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-        <Breadcrumb.Item>Bill</Breadcrumb.Item>
+        <Breadcrumb.Item>Post</Breadcrumb.Item>
+        <Breadcrumb.Item>Create post</Breadcrumb.Item>
       </Breadcrumb>
       <div
         style={{

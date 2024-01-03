@@ -21,7 +21,6 @@ export default function ContentComponent() {
             }}
           >
             <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
