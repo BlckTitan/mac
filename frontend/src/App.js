@@ -4,6 +4,8 @@ import Layout from "./layout";
 import Home from './pages/home';
 import Dashboard from "./pages/dashboard";
 import NoPage from './pages/noPage';
+import Post from "./pages/post/post";
+import CreatePost from "./pages/post/createPost";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="post" element={<Post />} />
+            <Route path="newPost" element={<CreatePost />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
