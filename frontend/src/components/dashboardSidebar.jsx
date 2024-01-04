@@ -1,4 +1,4 @@
-import { AppstoreOutlined, FormOutlined, PieChartOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, FormOutlined, HomeOutlined, PieChartOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React, { useState } from 'react';
@@ -15,7 +15,7 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem(<Link to='/dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
-  getItem(<Link to='/'>Home</Link>, '2', <PieChartOutlined />),
+  getItem(<Link to='/'>Home</Link>, '2', <HomeOutlined />),
   getItem('Settings', '3', <SettingOutlined />),
   getItem('Author', 'sub1', <UserOutlined />, [
     getItem('View Authors', '4'),
