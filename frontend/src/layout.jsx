@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Layout, theme, Breadcrumb} from 'antd';
+import { Layout, theme} from 'antd';
 
 // components
 import DashboardFooter from './components/dashboardFooter.jsx';
