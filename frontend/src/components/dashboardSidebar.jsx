@@ -1,4 +1,4 @@
-import { AppstoreOutlined, FormOutlined, HomeOutlined, PieChartOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, FormOutlined, HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React, { useState } from 'react';
@@ -14,16 +14,16 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<Link to='/dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
-  getItem(<Link to='/'>Home</Link>, '2', <HomeOutlined />),
+  getItem(<Link to='dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
+  getItem('Home', '2', <HomeOutlined />),
   getItem('Settings', '3', <SettingOutlined />),
   getItem('Author', 'sub1', <UserOutlined />, [
     getItem('View Authors', '4'),
     getItem('Create Author', '5'),
     getItem('Edit Author', '6'),
   ]),
-  getItem(<Link to='/post'>Blog Post</Link>, 'sub2', <FormOutlined />, [
-    getItem(<Link to='/newPost'>New Post</Link>, '7'),
+  getItem(<Link to='post'>Blog Post</Link>, 'sub2', <FormOutlined />, [
+    getItem(<Link to='post/newPost'>New Post</Link>, '7'),
   ]),
 ];
 

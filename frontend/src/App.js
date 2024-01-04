@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./layout";
+import LayoutComponent from "./layout";
 //pages
 import Home from './pages/home';
 import Dashboard from "./pages/dashboard";
@@ -12,11 +12,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<LayoutComponent />}>
             <Route index element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="post" element={<Post />} />
-            <Route path="newPost" element={<CreatePost />} />
+            <Route path="post/newPost" element={<CreatePost />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

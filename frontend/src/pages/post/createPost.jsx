@@ -1,50 +1,57 @@
-import { Layout, theme } from 'antd';
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import DashboardSidebar from '../../components/dashboardSidebar';
-import { Header } from 'antd/es/layout/layout';
-import ContentComponent from '../../components/content';
-import DashboardFooter from '../../components/dashboardFooter';
-import CreatePostContent from '../../components/createPostContent';
+import { Button, Form, Input,  } from 'antd';
+const { TextArea } = Input;
 
 export default function CreatePost() {
-
-    const {
-        token: { colorBgContainer },
-      } = theme.useToken();
+  
 
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
-    } = useForm();
-
-    const onSubmit = (data) => console.log(data)
-
-    console.log(watch("example"))
+      } = useForm();
+    
+      const onSubmit = (data) => console.log(data)
+    
+      console.log(watch("example"))
 
 
   return (
-    <Layout
-      style={{
-        minHeight: '100vh',
-      }}
-    >
-      <DashboardSidebar/>
-      
-      <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
+        <>
+            <Form onSubmit={handleSubmit(onSubmit)} labelCol={{span: 4,}} wrapperCol={{ span: 14, }} layout="horizontal" style={{maxWidth: 800,}}>
+              
+                <Form.Item label="Title">
+                    <Input 
+                    placeholder='necessitatibus, esse aperiam velit nesciunt, hic dignissimos deserunt.' 
+                    {...register("title", {required: true})} 
+                    />
+                    {errors.title && <span>This field is required</span>}
+                </Form.Item>
 
+                <Form.Item label="Description">
+                    <TextArea  
+                        {...register("description", { required: true })}
+                    />
+                    {errors.description && <span>This field is required</span>}
+                </Form.Item>
 
-        <CreatePostContent/>
-        <DashboardFooter/>
-      </Layout>
-    </Layout>
-  )
+                <Form.Item label="Feature">
+                    <Input {...register("feature", { required: true })} />
+                    {errors.feature && <span>This field is required</span>}
+                </Form.Item>
+
+                <Form.Item label="Tags">
+                    <Input {...register("tag", { required: true })} />
+                    {errors.tag && <span>This field is required</span>}
+                </Form.Item>
+                
+                <Form.Item>
+                    <Button type="submit" style={{border: 0, background:'#1677ff', color: '#fff', float: 'right '}}>submit</Button>
+                </Form.Item>
+
+            </Form>
+        </>
+    )
 }
