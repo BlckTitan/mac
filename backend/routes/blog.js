@@ -17,6 +17,8 @@ const ADMIN = require('../middleware/admin')
 router.get('/', async (req, res) => {
     const BLOG = await BLOG_MODEL.find()
     .select('blog author')
+    .sort({dateCreated: -1})
+
     res.send(BLOG)
 })
 

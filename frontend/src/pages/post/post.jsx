@@ -28,7 +28,10 @@ export default function PostComponent() {
 
   return (
     <>
-      <h2 className='text-2xl font-semibold mb-8'>All Posts</h2>
+      <header className='mb-8'>
+        <h2 className='text-2xl font-semibold'>All Posts</h2>
+      </header>
+      
       <List
         itemLayout="vertical"
         size="large"
