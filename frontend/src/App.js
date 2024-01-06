@@ -4,8 +4,9 @@ import LayoutComponent from "./layout";
 import Home from './pages/home';
 import Dashboard from "./pages/dashboard";
 import NoPage from './pages/noPage';
-import Post from "./pages/post/post";
+import Posts from "./pages/post/posts";
 import CreatePost from "./pages/post/createPost";
+import Post from "./pages/post/post";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route path="/" element={<LayoutComponent />}>
             <Route index element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="post" element={<Post />} />
+            <Route path="posts" element={<Posts />} />
+            <Route path="post/:id" element={<Post />} />
             <Route path="post/newPost" element={<CreatePost />} />
             <Route path="*" element={<NoPage />} />
           </Route>
