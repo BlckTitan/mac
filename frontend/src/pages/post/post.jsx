@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 // constant variables
 import {baseUrl} from '../../constants';
@@ -9,16 +9,19 @@ export default function PostComponent() {
 
   
   const [blogData, setBlogData] = useState('')
+  const blogId = useParams()
 
   useEffect(() => {
 
-    axios.get(`${baseUrl}/blog/req.params.id`)
+    axios.get(`${baseUrl}/blog/${blogId.id}`)
     .then((res) => {
       setBlogData(res.data)
-    })
+    }).catch((err) => {
+        console.log(err)
+      })
   }, [setBlogData])
+  
 
-  console.log(blogData)
 
   return (
     <>

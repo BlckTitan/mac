@@ -25,6 +25,9 @@ export default function PostsComponent() {
     .then((res) => {
       setBlogData(res.data)
     })
+    .catch((err) => {
+      console.log(err)
+    })
   }, [setBlogData])
 
   return (
