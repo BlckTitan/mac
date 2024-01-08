@@ -4,24 +4,28 @@ import { Link, useParams } from 'react-router-dom';
 
 // constant variables
 import {baseUrl} from '../../constants';
+import Loading from '../../components/loading';
 
 export default function PostComponent() {
 
   
   const [blogData, setBlogData] = useState('')
   const blogId = useParams()
+  const id = blogId?.id;
 
   useEffect(() => {
 
-    axios.get(`${baseUrl}/blog/${blogId.id}`)
+    axios.get(`${baseUrl}/blog/${id}`)
     .then((res) => {
       setBlogData(res.data)
-    }).catch((err) => {
+      console.log(blogData)
+    })
+    .catch((err) => {
         console.log(err)
-      })
+    })
   }, [setBlogData])
   
-
+    if(!blogData) return  <Loading/>
 
   return (
     <>

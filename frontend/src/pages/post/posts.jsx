@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 // constant variables
 import {baseUrl} from '../../constants';
+import Loading from '../../components/loading';
 
 export default function PostsComponent() {
 
@@ -29,6 +30,8 @@ export default function PostsComponent() {
       console.log(err)
     })
   }, [setBlogData])
+
+  if(!blogData) return <Loading/>
 
   return (
     <>
@@ -70,7 +73,7 @@ export default function PostsComponent() {
 
             <List.Item.Meta
               avatar={<Avatar src={item.avatar} />}
-              title={<Link to={`/post/${item.blog?._id}`}>{item.blog?.title}</Link>}
+              title={<Link to={`/post/${item?._id}`}>{item.blog?.title}</Link>}
               description={item.blog?.description}
               author={item.author?.name}
             />

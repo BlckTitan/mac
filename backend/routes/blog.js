@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 
 //get blog by id
 router.get('/:id', async (req, res) => {
-    const BLOG = await BLOG_MODEL.findById(req.params.id)
+    const BLOG = await BLOG_MODEL.findById({_id: req.params.id})
     .select('blog author')
 
     if(!BLOG) return res.status(404).send('THE REQUESTED BLOG WAS NOT FOUND')
