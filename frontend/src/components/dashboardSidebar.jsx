@@ -22,8 +22,8 @@ const items = [
     getItem('Create Author', '5'),
     getItem('Edit Author', '6'),
   ]),
-  getItem(<Link to='posts'>Blog Post</Link>, 'sub2', <FormOutlined />, [
-    getItem(<Link to='post/newPost'>New Post</Link>, '7'),
+  getItem(<Link to='blogs'>Blog Post</Link>, 'sub2', <FormOutlined />, [
+    getItem(<Link to='blog/newBlog'>New Blog</Link>, '7'),
   ]),
 ];
 

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
 
-export default function PostsComponent() {
+export default function BlogsComponent() {
 
   
   const [blogData, setBlogData] = useState('')
@@ -43,7 +43,7 @@ export default function PostsComponent() {
 
             <>
               <header className='mb-8'>
-                <h2 className='text-2xl font-semibold'>All Posts</h2>
+                <h2 className='text-2xl font-semibold'>All Blog Posts</h2>
               </header>
               
               <List
@@ -80,7 +80,7 @@ export default function PostsComponent() {
 
                     <List.Item.Meta
                       avatar={<Avatar src={item.avatar} />}
-                      title={<Link to={`/post/${item?._id}`}>{item.blog?.title}</Link>}
+                      title={<Link to={`/blog/${item?._id}`}>{item.blog?.title}</Link>}
                       description={item.blog?.description}
                       author={item.author?.name}
                     />
