@@ -70,7 +70,7 @@ router.put('/:id', [AUTH], async (req, res) => {
 
     if(RESULT.error) return res.status(400).send(RESULT.error.details[0].message)
 
-    const AUTHOR = await AUTHOR_MODEL.findById({_id: '658ed94802d0ff65a7f6f30a'})
+    const AUTHOR = await AUTHOR_MODEL.findById({_id: '659139dafe1ef0bc2027806b'})
 
     let updatedBlog = await BLOG_MODEL.findById(req.params.id)
 

@@ -26,7 +26,7 @@ export default function CreatePost() {
         }).then((res) => {
             console.log(res.data)
             
-            navigate('/post')
+            navigate('/blogs')
         })
         .catch(function (error) {
             console.log(error);
@@ -36,7 +36,7 @@ export default function CreatePost() {
   return (
         <>
             <header className='mb-8'>
-                <h2 className='text-2xl font-semibold'>Create Post</h2>
+                <h2 className='text-2xl font-semibold'>Create Blog Post</h2>
             </header>
             
             <Form 
@@ -45,6 +45,7 @@ export default function CreatePost() {
                 wrapperCol={{ span: 14, }} 
                 layout="horizontal" 
                 style={{maxWidth: 800,}}
+                initialValues={{ remember: true }}
             >
               
                 <Form.Item label="Title" name='title' 
