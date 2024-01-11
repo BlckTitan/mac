@@ -17,15 +17,19 @@ export default function EditBlog() {
     const navigate = useNavigate();
     const blogId = useParams()
 
-    useEffect(() => {
+    const getBlogById = () => {
+        axios.get(`${baseUrl}/blog/${blogId.id}`)
+        .then((res) => {
+            setBlogData(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
-      axios.get(`${baseUrl}/blog/${blogId.id}`)
-      .then((res) => {
-        setBlogData(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    useEffect(() => {
+        getBlogById()
+      
     }, [setBlogData])
     
 
