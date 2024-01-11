@@ -1,17 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import { Avatar, List, Space } from 'antd';
+import { ExclamationCircleFilled, LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { Avatar, Button, List, Modal, Space } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // constant variables
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
 
 export default function BlogsComponent() {
-
   
   const [blogData, setBlogData] = useState('')
+
+  const { confirm } = Modal;
+
+  const showDeleteConfirm = (id) => {
+    confirm({
+      title: 'Are you sure delete this blog post?',
+      icon: <ExclamationCircleFilled />,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+
+      onOk() {
+        
+        axios.delete(`${baseUrl}/blog/${id}`)
+        .then((res) => {
+          getAllBlogs()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
+    });
+  };
+
+  const getAllBlogs = () => {
+    axios.get(`${baseUrl}/blog`)
+    .then((res) => {
+      setBlogData(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   const IconText = ({ icon, text }) => (
     <Space>
@@ -21,14 +53,8 @@ export default function BlogsComponent() {
   );
 
   useEffect(() => {
-
-    axios.get(`${baseUrl}/blog`)
-    .then((res) => {
-      setBlogData(res.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    getAllBlogs()
+    
   }, [setBlogData])
 
   if(!blogData) return <Loading/>
@@ -86,6 +112,19 @@ export default function BlogsComponent() {
                     />
 
                     <small className='ml-10'>{item.author?.name}</small>
+                    <div className="ml-10 mt-2">
+
+                      <Link to={`/blog/editBlog/${item?._id}`} className="mr-4 text-blue-600">Edit</Link>
+
+                      <Button
+                        onClick={() => showDeleteConfirm(item?._id)}
+                        className='bg-red-600 text-white font-semibold hover:text-white'
+                      >
+                        Delete
+                      </Button>
+                      
+
+                    </div>
                     
                   </List.Item>
                 )}

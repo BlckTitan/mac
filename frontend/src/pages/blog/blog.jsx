@@ -13,6 +13,10 @@ export default function BlogComponent() {
   const [blogData, setBlogData] = useState('')
   const blogId = useParams()
 
+  const getBlogPost = () => {
+    
+  }
+
   useEffect(() => {
 
     axios.get(`${baseUrl}/blog/${blogId.id}`)
