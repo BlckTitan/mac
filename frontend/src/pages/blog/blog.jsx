@@ -14,11 +14,6 @@ export default function BlogComponent() {
   const blogId = useParams()
 
   const getBlogPost = () => {
-    
-  }
-
-  useEffect(() => {
-
     axios.get(`${baseUrl}/blog/${blogId.id}`)
     .then((res) => {
       setBlogData(res.data)
@@ -26,6 +21,10 @@ export default function BlogComponent() {
     .catch((err) => {
         console.log(err)
     })
+  }
+
+  useEffect(() => {
+    getBlogPost()  
   }, [setBlogData])
   
 
