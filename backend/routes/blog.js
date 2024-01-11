@@ -55,7 +55,8 @@ router.post('/', [AUTH], async (req, res) => {
         author: {
             _id: AUTHOR._id,
             name: AUTHOR.name
-        }
+        },
+        dateCreated: new Date()
     })
 
     newBlog = await newBlog.save()

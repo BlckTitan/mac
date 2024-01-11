@@ -60,3 +60,7 @@
 {"level":"error","message":"Cannot read properties of null (reading '_id') Cannot read properties of null (reading '_id')","stack":"TypeError: Cannot read properties of null (reading '_id')\n    at C:\\Users\\HP\\Documents\\Template\\mac\\backend\\routes\\blog.js:86:29\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
 {"level":"info","message":"listening on 5000"}
 {"level":"info","message":"Connected to database"}
+{"level":"info","message":"listening on 5000"}
+{"level":"info","message":"Connected to database"}
+{"level":"info","message":"listening on 5000"}
+{"level":"info","message":"Connected to database"}

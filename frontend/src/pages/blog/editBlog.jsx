@@ -24,7 +24,7 @@ export default function EditBlog() {
         setBlogData(res.data)
       })
       .catch((err) => {
-          console.log(err)
+        console.log(err)
       })
     }, [setBlogData])
     
@@ -48,12 +48,17 @@ export default function EditBlog() {
         });
     }
 
-    const initialValues = {
-      title: blogData && blogData?.blog.title,
-      description: blogData && blogData?.blog.description,
-      feature: blogData && blogData?.blog.feature,
-      tag: blogData && blogData?.blog.tags
+    let initialValues = () => {
+      if(blogData) return {
+        title: blogData?.blog.title,
+        description: blogData?.blog.description,
+        feature: blogData?.blog.feature,
+        tag: blogData?.blog.tags
+      }
     }
+
+    initialValues = initialValues()
+    
 
   return (
       <>
@@ -104,7 +109,7 @@ export default function EditBlog() {
                             {whitespace: true},
                             {min:5}
                         ]}
-                        hasFeedbac
+                        hasFeedback
                     >
                         <TextArea  
                             placeholder='Blog description goes here' 
