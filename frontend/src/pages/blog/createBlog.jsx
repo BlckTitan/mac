@@ -5,7 +5,7 @@ import axios from 'axios'
 import { baseUrl } from '../../constants';
 const { TextArea } = Input;
 
-export default function CreatePost() {
+export default function CreateBlogPost() {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')

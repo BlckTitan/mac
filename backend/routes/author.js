@@ -9,14 +9,14 @@ const AUTHOR_MODEL = require('../model/authorModel')
 //get all author
 router.get('/', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.find()
-    .select('name role')
+    .select('name role email phone')
     res.send(AUTHOR)
 })
 
 //get author by id
 router.get('/me', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.findById(req.params.id)
-    .select('name role')
+    .select('name role email phone')
 
     if(!AUTHOR) return res.status(404).send('THE REQUESTED USER WAS NOT FOUND')
 

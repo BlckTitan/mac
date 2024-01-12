@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
 
-export default function BlogsComponent() {
+export default function Blogs() {
   
   const [blogData, setBlogData] = useState('')
 
@@ -16,7 +16,7 @@ export default function BlogsComponent() {
 
   const showDeleteConfirm = (id) => {
     confirm({
-      title: 'Are you sure delete this blog post?',
+      title: 'Are you sure to delete this blog post?',
       icon: <ExclamationCircleFilled />,
       okText: 'Yes',
       okType: 'danger',
@@ -114,7 +114,7 @@ export default function BlogsComponent() {
                     <small className='ml-10'>{item.author?.name}</small>
                     <div className="ml-10 mt-2">
 
-                      <Link to={`/blog/editBlog/${item?._id}`} className="mr-4 text-blue-600">Edit</Link>
+                      <Link to={`/blog/editBlog/${item?._id}`} className="mr-4 text-blue-600 font-semibold">Edit</Link>
 
                       <Button
                         onClick={() => showDeleteConfirm(item?._id)}
