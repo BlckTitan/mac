@@ -6,7 +6,7 @@ import { baseUrl } from '../../constants';
 import LoadingComponent from '../../components/loading';
 const { TextArea } = Input;
 
-export default function EditBlog() {
+export default function EditBlogPost() {
 
   const [editTitle, setEditTitle] = useState('')
     const [editDescription, setEditDescription] = useState('')

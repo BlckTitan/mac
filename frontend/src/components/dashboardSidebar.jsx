@@ -17,7 +17,7 @@ const items = [
   getItem(<Link to='dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
   getItem('Home', '2', <HomeOutlined />),
   getItem('Settings', '3', <SettingOutlined />),
-  getItem('Author', 'sub1', <UserOutlined />, [
+  getItem(<Link to='author/authors'>Authors</Link>, 'sub1', <UserOutlined />, [
     getItem('View Authors', '4'),
     getItem('Create Author', '5'),
     getItem('Edit Author', '6'),

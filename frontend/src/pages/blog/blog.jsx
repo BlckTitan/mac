@@ -7,7 +7,7 @@ import { Space, Tag } from 'antd';
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
 
-export default function BlogComponent() {
+export default function Blog() {
 
   
   const [blogData, setBlogData] = useState('')

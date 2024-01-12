@@ -1,7 +1,7 @@
 import React from 'react'
 import Nav from '../components/nav'
 
-export default function home() {
+export default function Home() {
   return (
     <div className='relative w-full h-screen'>
       <Nav/>

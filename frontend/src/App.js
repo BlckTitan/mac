@@ -8,6 +8,7 @@ import Blogs from "./pages/blog/blogs";
 import CreateBlog from "./pages/blog/createBlog";
 import Blog from "./pages/blog/blog";
 import EditBlog from "./pages/blog/editBlog";
+import Authors from "./pages/author/authors";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="blog/:id" element={<Blog />} />
             <Route path="blog/newBlog" element={<CreateBlog />} />
             <Route path="blog/editBlog/:id" element={<EditBlog />} />
+            <Route path="author/authors" element={<Authors />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
