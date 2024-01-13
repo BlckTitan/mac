@@ -9,14 +9,14 @@ const AUTHOR_MODEL = require('../model/authorModel')
 //get all author
 router.get('/', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.find()
-    .select('name role email phone')
+    .select('-password')
     res.send(AUTHOR)
 })
 
 //get author by id
 router.get('/me', async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.findById(req.params.id)
-    .select('name role email phone')
+    .select('-passsword')
 
     if(!AUTHOR) return res.status(404).send('THE REQUESTED USER WAS NOT FOUND')
 
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
 })
 
 //update a author
-router.put('/:id', async (req, res) => {
+router.put('/me', async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
@@ -73,7 +73,7 @@ router.put('/:id', async (req, res) => {
         return res.status(404).send('THE REQUESTED AUTHOR WAS NOT FOUND')
     }
     const SALT = await BCRYPT.genSalt(10)
-    newAuthor.password = await BCRYPT.hash(newAuthor.password, SALT)
+    updatedUser.password = await BCRYPT.hash(updatedUser.password, SALT)
     
     updatedUser = await updatedUser.save()
 

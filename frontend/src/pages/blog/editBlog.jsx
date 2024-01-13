@@ -43,9 +43,8 @@ export default function EditBlogPost() {
             tags: editTag || blogData?.blog.tags
 
         }).then((res) => {
-            console.log(res.data)
             
-            navigate('/blogs')
+            navigate('blog/blogs')
         })
         .catch(function (error) {
             console.log(error);

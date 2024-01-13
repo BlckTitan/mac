@@ -73,6 +73,7 @@ export default function Authors() {
       dataIndex: 'action',
       render: (_, record) => (
         <Space size="middle">
+          {console.log(record._id)}
           <Link 
             to={`/author/editAuthor/${record._id}`}
             className='text-blue-600 font-semibold'
