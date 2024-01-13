@@ -18,12 +18,10 @@ const items = [
   getItem('Home', '2', <HomeOutlined />),
   getItem('Settings', '3', <SettingOutlined />),
   getItem(<Link to='author/authors'>Authors</Link>, 'sub1', <UserOutlined />, [
-    getItem('View Authors', '4'),
-    getItem('Create Author', '5'),
-    getItem('Edit Author', '6'),
+    getItem(<Link to='author/createAuthor'>Create Author</Link>, '4'),
   ]),
   getItem(<Link to='blogs'>Blog Post</Link>, 'sub2', <FormOutlined />, [
-    getItem(<Link to='blog/newBlog'>New Blog</Link>, '7'),
+    getItem(<Link to='blog/newBlog'>New Blog</Link>, '5'),
   ]),
 ];
 

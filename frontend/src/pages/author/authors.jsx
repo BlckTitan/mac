@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ExclamationCircleFilled} from '@ant-design/icons';
-import { Modal, Space, Tag, Divider, Table, Button } from 'antd';
+import { Modal, Space, Table, Button } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
