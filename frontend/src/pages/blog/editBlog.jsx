@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import  { useNavigate, useParams }  from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, Input,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
@@ -23,7 +25,7 @@ export default function EditBlogPost() {
             setBlogData(res.data)
         })
         .catch((err) => {
-            console.log(err)
+            toast.error(err.response.data, {position: 'top-right', toastId: 9})
         })
     }
 

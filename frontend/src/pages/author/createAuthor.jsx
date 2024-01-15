@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import { baseUrl } from '../../constants';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import  { useNavigate }  from "react-router-dom";
+
+//constant variables
+import { baseUrl } from '../../constants';
+
 import { Button, Form, Input, Select } from 'antd';
 const { Option } = Select;
+
 
 export default function CreateAuthor() {
 
@@ -27,19 +33,18 @@ export default function CreateAuthor() {
             isAdmin: (role === 'administrator') ? true : false
 
         }).then((res) => {
-            console.log(res.data)
             
             navigate('/author/authors')
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(function (err) {
+            toast.error(err.response.data, {position: 'top-right', toastId: 3})
         });
     }
 
   return (
     <>
             <header className='mb-8'>
-                <h2 className='text-2xl font-semibold'>Create Blog Post</h2>
+                <h2 className='text-2xl font-semibold'>Create Blog Author</h2>
             </header>
             
             <Form 
@@ -93,7 +98,7 @@ export default function CreateAuthor() {
                         <Option value="administrator">
                             Administrator
                         </Option>
-                        <Option value="publisher">
+                        <Option value="publisher" default>
                             Publisher
                         </Option>
                     </Select>

@@ -2,6 +2,8 @@ const Joi = require('joi')
 const EXPRESS = require('express')
 const router = EXPRESS.Router()
 const BCRYPT = require('bcrypt')
+const AUTH = require('../middleware/auth')
+const ADMIN = require('../middleware/admin')
 
 //MODELS
 const AUTHOR_MODEL = require('../model/authorModel')
@@ -24,7 +26,7 @@ router.get('/me', async (req, res) => {
 })
 
 //post to author
-router.post('/', async (req, res) => {
+router.post('/', [AUTH, ADMIN], async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
@@ -52,7 +54,7 @@ router.post('/', async (req, res) => {
 })
 
 //update a author
-router.put('/me', async (req, res) => {
+router.put('/me', [AUTH, ADMIN], async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
@@ -81,7 +83,7 @@ router.put('/me', async (req, res) => {
 })
 
 //delete a author
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [AUTH, ADMIN], async (req, res) => {
 
     const AUTHOR = await AUTHOR_MODEL.findByIdAndDelete({_id: req.params.id})
 

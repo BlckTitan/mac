@@ -3,10 +3,12 @@ import { ExclamationCircleFilled} from '@ant-design/icons';
 import { Modal, Space, Table, Button } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../../components/loading';
 
 // constant variables
 import {baseUrl} from '../../constants';
-import Loading from '../../components/loading';
 
 export default function Authors() {
   
@@ -26,10 +28,14 @@ export default function Authors() {
         
         axios.delete(`${baseUrl}/author/${id}`)
         .then((res) => {
-          getAllAuthors()
+
+          getAllAuthors();
+
+          toast.success("Author deleted successfully!", {position: 'top-right'})
+
         })
         .catch((err) => {
-          console.log(err)
+          toast.error(err.response.data, {position: 'top-right', toastId: 2})
         })
       }
     });
@@ -41,7 +47,7 @@ export default function Authors() {
       setAuthorData(res.data)
     })
     .catch((err) => {
-      console.log(err)
+      toast.error(err.response.data, {position: 'top-right', toastId: 3})
     })
   }
   
@@ -73,7 +79,7 @@ export default function Authors() {
       dataIndex: 'action',
       render: (_, record) => (
         <Space size="middle">
-          {console.log(record._id)}
+          
           <Link 
             to={`/author/editAuthor/${record._id}`}
             className='text-blue-600 font-semibold'

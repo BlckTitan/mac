@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import  { useNavigate }  from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, Input,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
@@ -24,12 +26,11 @@ export default function CreateBlogPost() {
             tags: tag
 
         }).then((res) => {
-            console.log(res.data)
             
             navigate('/blogs')
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(function (err) {
+            toast.error(err.response.data, {position: 'top-right', toastId: 6})
         });
     }
 

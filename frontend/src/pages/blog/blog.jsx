@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Space, Tag } from 'antd';
 
 // constant variables
@@ -19,7 +21,7 @@ export default function Blog() {
       setBlogData(res.data)
     })
     .catch((err) => {
-        console.log(err)
+      toast.error(err.response.data, {position: 'top-right', toastId: 2})
     })
   }
 

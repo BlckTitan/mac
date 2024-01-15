@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import  { useNavigate, useParams }  from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, Input, Select,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
@@ -24,7 +26,7 @@ export default function EditAuthor() {
             setAuthorData(res.data)
         })
         .catch((err) => {
-            console.log(err)
+            toast.error(err.response.data, {position: 'top-right', toastId: 4})
         })
     }
 
@@ -49,8 +51,8 @@ export default function EditAuthor() {
             
             navigate('author/authors')
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(function (err) {
+            toast.error(err.response.data, {position: 'top-right', toastId: 5})
         });
     }
 

@@ -11,10 +11,12 @@ import EditBlog from "./pages/blog/editBlog";
 import Authors from "./pages/author/authors";
 import CreateAuthor from "./pages/author/createAuthor";
 import EditAuthor from "./pages/author/editAuthor";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LayoutComponent />}>

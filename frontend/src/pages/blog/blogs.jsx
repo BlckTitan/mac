@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ExclamationCircleFilled, LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { Avatar, Button, List, Modal, Space } from 'antd';
 import axios from 'axios';
@@ -29,7 +31,7 @@ export default function Blogs() {
           getAllBlogs()
         })
         .catch((err) => {
-          console.log(err)
+          toast.error(err.response.data, {position: 'top-right', toastId: 6})
         })
       }
     });
@@ -41,7 +43,7 @@ export default function Blogs() {
       setBlogData(res.data)
     })
     .catch((err) => {
-      console.log(err)
+      toast.error(err.response.data, {position: 'top-right', toastId: 7})
     })
   }
 
