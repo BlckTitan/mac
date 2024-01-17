@@ -25,14 +25,14 @@ const LayoutComponent = () => {
   return (
     <>
       {
-        currentPage === '/' && 
+        (currentPage === '/' || currentPage === '/login') && 
         <div>
           <Outlet />
         </div>
       }
 
       {
-        currentPage !== '/' &&
+        (currentPage !== '/' && currentPage !== '/login') &&
         <Layout
         style={{
           minHeight: '100vh',

@@ -40,7 +40,7 @@ export default function EditBlogPost() {
         axios.put(`${baseUrl}/blog/${blogId.id}`, 
         {
             title: editTitle || blogData?.blog.title, 
-            description: editDescription || blogData?.blog.description, 
+            description: editDescription || blogData?.blog.description,  
             feature: editFeature || blogData?.blog.feature, 
             tags: editTag || blogData?.blog.tags
 

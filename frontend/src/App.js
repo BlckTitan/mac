@@ -11,6 +11,7 @@ import EditBlog from "./pages/blog/editBlog";
 import Authors from "./pages/author/authors";
 import CreateAuthor from "./pages/author/createAuthor";
 import EditAuthor from "./pages/author/editAuthor";
+import Login from "./pages/login";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="author/authors" element={<Authors />} />
             <Route path="author/createAuthor" element={<CreateAuthor />} />
             <Route path="author/editAuthor/:id" element={<EditAuthor />} />
+            <Route path="login" element={<Login/>} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
