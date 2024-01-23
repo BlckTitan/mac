@@ -39,7 +39,7 @@ router.post('/', [AUTH], async (req, res) => {
 
     if(RESULT.error) return res.status(400).send(RESULT.error.details[0].message)
 
-    const AUTHOR = await AUTHOR_MODEL.findById({_id: '659139dafe1ef0bc2027806b'})
+    const AUTHOR = await AUTHOR_MODEL.findById({_id: req.author._id})
 
     if(!AUTHOR) return res.status(404).send('INVALID AUTHOR')
 
@@ -71,7 +71,7 @@ router.put('/:id', [AUTH], async (req, res) => {
 
     if(RESULT.error) return res.status(400).send(RESULT.error.details[0].message)
 
-    const AUTHOR = await AUTHOR_MODEL.findById({_id: '659139dafe1ef0bc2027806b'})
+    const AUTHOR = await AUTHOR_MODEL.findById({_id: req.author._id})
 
     let updatedBlog = await BLOG_MODEL.findById(req.params.id)
 

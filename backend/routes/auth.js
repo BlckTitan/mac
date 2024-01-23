@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
     if(!EXISTING_PASSWORD) return res.status(400).send('INVALID EMAIL OR PASSWORD')
 
     const TOKEN = EXISTING_AUTHOR.generateAuthToken()
+ 
 
     res.header('x-auth-token', TOKEN).send(EXISTING_AUTHOR)
 })
