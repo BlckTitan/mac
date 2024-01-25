@@ -24,7 +24,9 @@ export default function Login() {
             password,
 
         }).then((res) => {
-            
+
+            // save the user to local stoprage
+            localStorage.setItem('author', JSON.stringify(res.data))
             navigate('/dashboard')
         })
         .catch(function (err) {
@@ -33,15 +35,15 @@ export default function Login() {
     }
 
   return (
-    <main className='w-full h-screen flex justify-center items-start'>
-        <div className="w-full md:w-2/5 h-fit flex flex-col mt-48">
+    <main className='w-full h-screen flex justify-center items-start bg-regal-blue'>
+        <div className="w-full md:w-2/5 h-fit flex flex-col mt-16 xl:mt-48 p-4 xl:p-0 bg-white">
             <Form 
                     autoComplete='off' 
                     labelCol={{span: 6,}} 
                     wrapperCol={{ span: 14, }} 
                     layout="horizontal" 
                     style={{maxWidth: 800}}
-                    className="w-full md:p-24 flex flex-col rounded-md border border-solid"
+                    className="w-full p-4 md:p-24 flex flex-col rounded-md border border-solid"
                 >
                 
                     <Form.Item label="Email" name='email'

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-import { Layout, theme} from 'antd';
+import { Outlet, useNavigate } from "react-router-dom";
+import { Button, Layout, theme} from 'antd';
 
 // components
 import DashboardFooter from './components/dashboardFooter.jsx';
@@ -9,6 +9,15 @@ import { Content } from "antd/es/layout/layout.js";
 const { Header } = Layout;
 
 const LayoutComponent = () => {
+
+  
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('author');
+
+    navigate('/login')
+  }
 
   
   const [currentPage, setCurrentPage] = useState(window.location.pathname)
@@ -46,7 +55,11 @@ const LayoutComponent = () => {
                 padding: 0,
                 background: colorBgContainer,
               }}
-            />
+              className="flex justify-end items-center"
+            >
+              <Button onClick={handleLogout} className="font-semibold text-regal-blue border-0 shadow-none">Logout</Button>
+            </Header>
+
             <Content
               style={{
                 margin: '0 16px',
