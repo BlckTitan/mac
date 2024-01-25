@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ExclamationCircleFilled} from '@ant-design/icons';
 import { Modal, Space, Table, Button } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../../components/loading';
@@ -13,6 +13,7 @@ import {baseUrl} from '../../constants';
 export default function Authors() {
   
   const [authorData, setAuthorData] = useState('')
+  const navigate = useNavigate()
 
   const { confirm } = Modal;
 
@@ -101,6 +102,13 @@ export default function Authors() {
     getAllAuthors()
     
   }, [setAuthorData])
+
+
+  useEffect(() => {
+    const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
+
+    if(!LOGGED_IN) return navigate('/login')
+  }, [])
 
   if(!authorData) return <Loading/>
 

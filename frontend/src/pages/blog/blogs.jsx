@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ExclamationCircleFilled, LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { Avatar, Button, List, Modal, Space } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // constant variables
 import {baseUrl} from '../../constants';
@@ -15,6 +15,7 @@ export default function Blogs() {
   const [blogData, setBlogData] = useState('')
 
   const { confirm } = Modal;
+  const navigate = useNavigate();
 
   const showDeleteConfirm = (id) => {
     confirm({
@@ -58,6 +59,14 @@ export default function Blogs() {
     getAllBlogs()
     
   }, [setBlogData])
+
+  useEffect(() => {
+    const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
+
+    if(!LOGGED_IN) return navigate('/login')
+  }, [])
+
+  
 
   if(!blogData) return <Loading/>
 

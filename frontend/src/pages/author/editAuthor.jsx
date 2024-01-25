@@ -35,6 +35,12 @@ export default function EditAuthor() {
       
     }, [setAuthorData])
     
+    useEffect(() => {
+      const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
+  
+      if(!LOGGED_IN) return navigate('/login')
+    }, [])
+    
 
     const handleSubmit = () => {
 

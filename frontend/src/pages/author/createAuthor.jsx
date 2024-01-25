@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,6 +40,13 @@ export default function CreateAuthor() {
             toast.error(err.response.data, {position: 'top-right', toastId: 3})
         });
     }
+
+    useEffect(() => {
+        const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
+    
+        if(!LOGGED_IN) return navigate('/login')
+    }, [])
+      
 
   return (
     <>
