@@ -55,8 +55,9 @@ const LayoutComponent = () => {
                 padding: 0,
                 background: colorBgContainer,
               }}
-              className="flex justify-end items-center"
+              className="flex justify-between items-center"
             >
+              <h2 className="text-regal-blue text-3xl font-bold">MAC</h2>
               <Button onClick={handleLogout} className="font-semibold text-regal-blue border-0 shadow-none">Logout</Button>
             </Header>
 

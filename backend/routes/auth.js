@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     const TOKEN = EXISTING_AUTHOR.generateAuthToken()
  
 
-    res.header('x-auth-token', TOKEN).send([EXISTING_AUTHOR.email, EXISTING_AUTHOR.name, TOKEN])
+    res.header('x-auth-token', TOKEN).send([EXISTING_AUTHOR._id, EXISTING_AUTHOR.role, TOKEN])
 })
 
 const validateRequest = (request) => {

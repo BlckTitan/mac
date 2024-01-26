@@ -37,6 +37,11 @@ export default function Login() {
   return (
     <main className='w-full h-screen flex justify-center items-start bg-regal-blue'>
         <div className="w-full md:w-2/5 h-fit flex flex-col mt-16 xl:mt-48 p-4 xl:p-0 bg-white">
+
+            <header className='my-4'>
+                <h2 className="text-regal-blue text-3xl font-bold">MAC</h2>
+            </header>
+
             <Form 
                     autoComplete='off' 
                     labelCol={{span: 6,}} 
