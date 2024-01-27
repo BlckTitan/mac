@@ -15,9 +15,11 @@ const ADMIN = require('../middleware/admin')
 
 //get all blogs
 router.get('/', AUTH, async (req, res) => {
-    const BLOG = await BLOG_MODEL.findById({_id: req.author._id})
+    const BLOG = await BLOG_MODEL.find({"author._id": req.author._id})
     .select('blog author')
     .sort({dateCreated: -1})
+
+    if(!BLOG) return res.status(404).send('THE REQUEST BLOG NOT FOUND FOR THIS USER')
 
     res.send(BLOG)
 })

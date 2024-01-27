@@ -13,11 +13,13 @@ import CreateAuthor from "./pages/author/createAuthor";
 import EditAuthor from "./pages/author/editAuthor";
 import Login from "./pages/login";
 import { ToastContainer } from "react-toastify";
-import { loggedIn } from "./utils/func";
 
 function App() {
 
-  const LOGGED_IN = loggedIn()
+  // const [checkLogin, setCheckLogin] = useState(null)
+
+  const checkLogin = localStorage.getItem('author')
+
 
   return (
     <div className="App">
@@ -26,14 +28,14 @@ function App() {
         <Routes>
           <Route path="/" element={<LayoutComponent />}>
             <Route index element={<Home />} />
-            <Route path="dashboard" element={LOGGED_IN ? <Dashboard /> : <Navigate to='/login'/> } />
-            <Route path="blogs" element={LOGGED_IN ? <Blogs /> :  <Navigate to='/login'/> } />
-            <Route path="blog/:id" element={LOGGED_IN ? <Blog /> : <Navigate to='/login'/> } />
-            <Route path="blog/newBlog" element={LOGGED_IN ? <CreateBlog /> : <Navigate to='/login'/> } />
-            <Route path="blog/editBlog/:id" element={LOGGED_IN ? <EditBlog />  : <Navigate to='/login'/> } />
-            <Route path="author/authors" element={LOGGED_IN ? <Authors /> : <Navigate to='/login'/> } />
-            <Route path="author/createAuthor" element={LOGGED_IN ? <CreateAuthor />  : <Navigate to='/login'/> } />
-            <Route path="author/editAuthor/:id" element={LOGGED_IN ? <EditAuthor />  : <Navigate to='/login'/> } />
+            <Route path="dashboard" element={checkLogin ? <Dashboard /> : <Navigate to='/login'/> } />
+            <Route path="blogs" element={checkLogin ? <Blogs /> :  <Navigate to='/login'/> } />
+            <Route path="blog/:id" element={checkLogin ? <Blog /> : <Navigate to='/login'/> } />
+            <Route path="blog/newBlog" element={checkLogin ? <CreateBlog /> : <Navigate to='/login'/> } />
+            <Route path="blog/editBlog/:id" element={checkLogin ? <EditBlog />  : <Navigate to='/login'/> } />
+            <Route path="author/authors" element={checkLogin ? <Authors /> : <Navigate to='/login'/> } />
+            <Route path="author/createAuthor" element={checkLogin ? <CreateAuthor />  : <Navigate to='/login'/> } />
+            <Route path="author/editAuthor/:id" element={checkLogin ? <EditAuthor />  : <Navigate to='/login'/> } />
             <Route path="login" element={<Login/>} />
             <Route path="*" element={<NoPage />} />
           </Route>

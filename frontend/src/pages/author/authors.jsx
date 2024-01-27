@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ExclamationCircleFilled} from '@ant-design/icons';
 import { Modal, Space, Table, Button } from 'antd';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../../components/loading';
@@ -12,7 +12,7 @@ import {baseUrl} from '../../constants';
 import { loggedIn } from '../../utils/func';
 
 
-const LOGGED_IN = loggedIn
+const LOGGED_IN = loggedIn()
 
 export default function Authors() {
   
