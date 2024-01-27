@@ -6,11 +6,15 @@ import { Button, Form, Input,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
 import LoadingComponent from '../../components/loading';
+import { loggedIn } from '../../utils/func';
 const { TextArea } = Input;
+
+
+const LOGGED_IN = loggedIn()
 
 export default function EditBlogPost() {
 
-  const [editTitle, setEditTitle] = useState('')
+    const [editTitle, setEditTitle] = useState('')
     const [editDescription, setEditDescription] = useState('')
     const [editFeature, setEditFeature] = useState('')
     const [editTag, setEditTag] = useState('');
@@ -20,7 +24,11 @@ export default function EditBlogPost() {
     const blogId = useParams()
 
     const getBlogById = () => {
-        axios.get(`${baseUrl}/blog/${blogId.id}`)
+        axios.get(`${baseUrl}/blog/${blogId.id}`, {
+            headers: {
+              'x-auth-token': `${LOGGED_IN[2]}`
+            }
+          })
         .then((res) => {
             setBlogData(res.data)
         })
@@ -33,16 +41,14 @@ export default function EditBlogPost() {
         getBlogById()
       
     }, [setBlogData])
-    
-    useEffect(() => {
-        const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-    
-        if(!LOGGED_IN) return navigate('/login')
-    }, [])
 
     const handleSubmit = () => {
 
-        axios.put(`${baseUrl}/blog/${blogId.id}`, 
+        axios.put(`${baseUrl}/blog/${blogId.id}`, {
+            headers: {
+              'x-auth-token': `${LOGGED_IN[2]}`
+            }
+        },
         {
             title: editTitle || blogData?.blog.title, 
             description: editDescription || blogData?.blog.description,  
@@ -53,8 +59,8 @@ export default function EditBlogPost() {
             
             navigate('blog/blogs')
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(function (err) {
+            toast.error(err.response.data, {position: 'top-right', toastId: 11})
         });
     }
 

@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import  { useNavigate }  from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, Input,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
+import { loggedIn } from '../../utils/func'
 const { TextArea } = Input;
+
+
+const LOGGED_IN = loggedIn()
 
 export default function CreateBlogPost() {
 
@@ -18,7 +22,11 @@ export default function CreateBlogPost() {
 
     const handleSubmit = () => {
 
-        axios.post(`${baseUrl}/blog`, 
+        axios.post(`${baseUrl}/blog`, {
+            headers: {
+              'x-auth-token': `${LOGGED_IN[2]}`
+            }
+        }, 
         {
             title: title, 
             description: description, 
@@ -33,12 +41,6 @@ export default function CreateBlogPost() {
             toast.error(err.response.data, {position: 'top-right', toastId: 6})
         });
     }
-
-    useEffect(() => {
-        const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-
-        if(!LOGGED_IN) return navigate('/login')
-    }, [])
 
   return (
         <>

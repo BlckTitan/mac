@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Space, Tag } from 'antd';
@@ -8,16 +8,23 @@ import { Space, Tag } from 'antd';
 // constant variables
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
+import { loggedIn } from '../../utils/func';
+
+
+const LOGGED_IN = loggedIn()
 
 export default function Blog() {
 
   
   const [blogData, setBlogData] = useState('')
   const blogId = useParams()
-  const navigate = useNavigate();
 
   const getBlogPost = () => {
-    axios.get(`${baseUrl}/blog/${blogId.id}`)
+    axios.get(`${baseUrl}/blog/${blogId.id}`, {
+      headers: {
+        'x-auth-token': `${LOGGED_IN[2]}`
+      }
+  })
     .then((res) => {
       setBlogData(res.data)
     })
@@ -30,11 +37,6 @@ export default function Blog() {
     getBlogPost()  
   }, [setBlogData])
   
-  useEffect(() => {
-    const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-
-    if(!LOGGED_IN) return navigate('/login')
-  }, [])
   
 
   return (

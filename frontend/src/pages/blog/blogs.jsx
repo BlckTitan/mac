@@ -4,18 +4,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ExclamationCircleFilled, LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { Avatar, Button, List, Modal, Space } from 'antd';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // constant variables
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
+import { loggedIn } from '../../utils/func';
+
+const LOGGED_IN = loggedIn()
 
 export default function Blogs() {
   
   const [blogData, setBlogData] = useState('')
 
   const { confirm } = Modal;
-  const navigate = useNavigate();
 
   const showDeleteConfirm = (id) => {
     confirm({
@@ -27,7 +29,11 @@ export default function Blogs() {
 
       onOk() {
         
-        axios.delete(`${baseUrl}/blog/${id}`)
+        axios.delete(`${baseUrl}/blog/${id}`, {
+          headers: {
+            'x-auth-token': `${LOGGED_IN[2]}`
+          }
+      })
         .then((res) => {
           getAllBlogs()
         })
@@ -39,13 +45,19 @@ export default function Blogs() {
   };
 
   const getAllBlogs = () => {
-    axios.get(`${baseUrl}/blog`)
+
+    axios.get(`${baseUrl}/blog`, {
+      headers: {
+        'x-auth-token': `${LOGGED_IN[2]}`
+      }
+    })
     .then((res) => {
       setBlogData(res.data)
     })
     .catch((err) => {
       toast.error(err.response.data, {position: 'top-right', toastId: 7})
     })
+
   }
 
   const IconText = ({ icon, text }) => (
@@ -59,13 +71,6 @@ export default function Blogs() {
     getAllBlogs()
     
   }, [setBlogData])
-
-  useEffect(() => {
-    const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-
-    if(!LOGGED_IN) return navigate('/login')
-  }, [])
-
   
 
   if(!blogData) return <Loading/>

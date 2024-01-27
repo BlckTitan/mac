@@ -8,8 +8,11 @@ import  { useNavigate }  from "react-router-dom";
 import { baseUrl } from '../../constants';
 
 import { Button, Form, Input, Select } from 'antd';
+import { loggedIn } from '../../utils/func';
 const { Option } = Select;
 
+
+const LOGGED_IN = loggedIn
 
 export default function CreateAuthor() {
 
@@ -23,7 +26,11 @@ export default function CreateAuthor() {
 
     const handleSubmit = () => {
 
-        axios.post(`${baseUrl}/author`, 
+        axios.post(`${baseUrl}/author`, {
+            headers: {
+              'x-auth-token': `${LOGGED_IN[2]}`
+            }
+        }, 
         {
             name: name, 
             role: role, 
@@ -40,13 +47,6 @@ export default function CreateAuthor() {
             toast.error(err.response.data, {position: 'top-right', toastId: 3})
         });
     }
-
-    useEffect(() => {
-        const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-    
-        if(!LOGGED_IN) return navigate('/login')
-    }, [])
-      
 
   return (
     <>

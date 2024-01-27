@@ -14,8 +14,8 @@ const ADMIN = require('../middleware/admin')
 // Fawn.init(MONGOOSE)
 
 //get all blogs
-router.get('/', async (req, res) => {
-    const BLOG = await BLOG_MODEL.find()
+router.get('/', AUTH, async (req, res) => {
+    const BLOG = await BLOG_MODEL.findById({_id: req.author._id})
     .select('blog author')
     .sort({dateCreated: -1})
 
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 })
 
 //get blog by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', AUTH, async (req, res) => {
     const BLOG = await BLOG_MODEL.findById({_id: req.params.id})
     .select('blog author')
 
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //post to blog
-router.post('/', [AUTH], async (req, res) => {
+router.post('/', AUTH, async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 
@@ -65,7 +65,7 @@ router.post('/', [AUTH], async (req, res) => {
 })
 
 //update a blog
-router.put('/:id', [AUTH], async (req, res) => {
+router.put('/:id', AUTH, async (req, res) => {
 
     const RESULT = validateRequest(req.body)
 

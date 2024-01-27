@@ -9,14 +9,14 @@ const ADMIN = require('../middleware/admin')
 const AUTHOR_MODEL = require('../model/authorModel')
 
 //get all author
-router.get('/', async (req, res) => {
+router.get('/', [AUTH, ADMIN], async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.find()
     .select('-password')
     res.send(AUTHOR)
 })
 
 //get author by id
-router.get('/me', async (req, res) => {
+router.get('/me', [AUTH, ADMIN], async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.findById(req.params.id)
     .select('-passsword')
 

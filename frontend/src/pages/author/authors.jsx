@@ -9,11 +9,14 @@ import Loading from '../../components/loading';
 
 // constant variables
 import {baseUrl} from '../../constants';
+import { loggedIn } from '../../utils/func';
+
+
+const LOGGED_IN = loggedIn
 
 export default function Authors() {
   
   const [authorData, setAuthorData] = useState('')
-  const navigate = useNavigate()
 
   const { confirm } = Modal;
 
@@ -27,7 +30,11 @@ export default function Authors() {
 
       onOk() {
         
-        axios.delete(`${baseUrl}/author/${id}`)
+        axios.delete(`${baseUrl}/author/${id}`, {
+          headers: {
+            'x-auth-token': `${LOGGED_IN[2]}`
+          }
+        })
         .then((res) => {
 
           getAllAuthors();
@@ -43,7 +50,11 @@ export default function Authors() {
   };
 
   const getAllAuthors = () => {
-    axios.get(`${baseUrl}/author`)
+    axios.get(`${baseUrl}/author`, {
+      headers: {
+        'x-auth-token': `${LOGGED_IN[2]}`
+      }
+    })
     .then((res) => {
       setAuthorData(res.data)
     })
@@ -102,13 +113,6 @@ export default function Authors() {
     getAllAuthors()
     
   }, [setAuthorData])
-
-
-  useEffect(() => {
-    const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-
-    if(!LOGGED_IN) return navigate('/login')
-  }, [])
 
   if(!authorData) return <Loading/>
 

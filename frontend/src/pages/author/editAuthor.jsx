@@ -6,6 +6,7 @@ import { Button, Form, Input, Select,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
 import LoadingComponent from '../../components/loading';
+import { loggedIn } from '../../utils/func';
 const { Option } = Select;
 
 export default function EditAuthor() {
@@ -20,8 +21,15 @@ export default function EditAuthor() {
     const navigate = useNavigate();
     const authorId = useParams()
 
+    
+    const LOGGED_IN = loggedIn()
+
     const getAuthorById = () => {
-        axios.get(`${baseUrl}/author/${authorId.id}`)
+        axios.get(`${baseUrl}/author/${authorId.id}`, {
+            headers: {
+              'x-auth-token': `${LOGGED_IN[2]}`
+            }
+        })
         .then((res) => {
             setAuthorData(res.data)
         })
@@ -35,16 +43,14 @@ export default function EditAuthor() {
       
     }, [setAuthorData])
     
-    useEffect(() => {
-      const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-  
-      if(!LOGGED_IN) return navigate('/login')
-    }, [])
-    
 
     const handleSubmit = () => {
 
-        axios.put(`${baseUrl}/author/${authorId.id}`, 
+        axios.put(`${baseUrl}/author/${authorId.id}`, {
+            headers: {
+              'x-auth-token': `${LOGGED_IN[2]}`
+            }
+        }, 
         {
             name: editName || authorData?.name, 
             role: editRole || authorData?.role, 
