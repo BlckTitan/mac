@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ExclamationCircleFilled} from '@ant-design/icons';
 import { Modal, Space, Table, Button } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../../components/loading';
@@ -17,6 +17,7 @@ const LOGGED_IN = loggedIn()
 export default function Authors() {
   
   const [authorData, setAuthorData] = useState('')
+  const navigate = useNavigate()
 
   const { confirm } = Modal;
 
@@ -110,6 +111,10 @@ export default function Authors() {
   ];
 
   useEffect(() => {
+    // check for login
+    if(!LOGGED_IN) return navigate('/login')
+    // check for admin priviledge
+    if(LOGGED_IN[1] !== 'administrator') return navigate('/dashboard')
     getAllAuthors()
     
   }, [setAuthorData])

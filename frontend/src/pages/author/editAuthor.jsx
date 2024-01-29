@@ -39,6 +39,12 @@ export default function EditAuthor() {
     }
 
     useEffect(() => {
+        
+        // check for login
+        if(!LOGGED_IN) return navigate('/login')
+        // check for admin priviledge
+        if(LOGGED_IN[1] !== 'administrator') return navigate('/dashboard')
+        
         getAuthorById()
       
     }, [setAuthorData])

@@ -48,6 +48,14 @@ export default function CreateAuthor() {
         });
     }
 
+    useEffect(() => {
+        
+    // check for login
+    if(!LOGGED_IN) return navigate('/login')
+    // check for admin priviledge
+    if(LOGGED_IN[1] !== 'administrator') return navigate('/dashboard')
+    }, [])
+
   return (
     <>
             <header className='mb-8'>
