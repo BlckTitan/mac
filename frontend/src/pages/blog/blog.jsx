@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Space, Tag } from 'antd';
@@ -18,13 +18,15 @@ export default function Blog() {
   
   const [blogData, setBlogData] = useState('')
   const blogId = useParams()
+  const navigate = useNavigate()
 
   const getBlogPost = () => {
+
     axios.get(`${baseUrl}/blog/${blogId.id}`, {
       headers: {
         'x-auth-token': `${LOGGED_IN[2]}`
       }
-  })
+    })
     .then((res) => {
       setBlogData(res.data)
     })
@@ -34,11 +36,10 @@ export default function Blog() {
   }
 
   useEffect(() => {
+    if(!LOGGED_IN) return navigate('/login')
     getBlogPost()  
   }, [setBlogData])
   
-  
-
   return (
     <>
         {

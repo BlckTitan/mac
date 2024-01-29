@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +25,7 @@ export default function Login() {
 
         }).then((res) => {
 
-            // save the user to local stoprage
+            // save the user to local storage
             localStorage.setItem('author', JSON.stringify(res.data))
             navigate('/dashboard')
         })

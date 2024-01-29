@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import  { useNavigate }  from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,13 @@ export default function CreateBlogPost() {
     const [tag, setTag] = useState('');
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+
+        if(!LOGGED_IN) return navigate('/login')
+    
+    }, [])
+    
 
     const handleSubmit = () => {
 

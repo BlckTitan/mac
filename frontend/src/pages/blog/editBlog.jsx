@@ -38,6 +38,9 @@ export default function EditBlogPost() {
     }
 
     useEffect(() => {
+
+        if(!LOGGED_IN) return navigate('/login')
+    
         getBlogById()
       
     }, [setBlogData])

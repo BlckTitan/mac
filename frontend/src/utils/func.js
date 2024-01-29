@@ -1,4 +1,6 @@
+
+
 export const loggedIn = () => {
     const LOGGED_IN = JSON.parse(localStorage.getItem('author'))
-    return LOGGED_IN;
+    if(LOGGED_IN) return LOGGED_IN;
 }
