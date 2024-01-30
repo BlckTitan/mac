@@ -1,8 +1,10 @@
+
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppstoreOutlined, FormOutlined, HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd'
 import Sider from 'antd/es/layout/Sider'
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { loggedIn } from '../utils/func';
 
 function getItem(label, key, icon, children) {
   return {
@@ -13,22 +15,35 @@ function getItem(label, key, icon, children) {
   };
 }
 
-const items = [
-  getItem(<Link to='dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
-  getItem('Home', '2', <HomeOutlined />),
-  getItem('Settings', '3', <SettingOutlined />),
-  getItem(<Link to='author/authors'>Authors</Link>, 'sub1', <UserOutlined />, [
-    getItem(<Link to='author/createAuthor'>Create Author</Link>, '4'),
-  ]),
-  getItem(<Link to='blogs'>Blog Post</Link>, 'sub2', <FormOutlined />, [
-    getItem(<Link to='blog/newBlog'>New Blog</Link>, '5'),
-  ]),
-];
+
+
+
 
 export default function DashboardSidebar() {
 
   
   const [collapsed, setCollapsed] = useState(false);
+
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if(!LOGGED_IN) return navigate('/login')
+  }, [])
+
+  const LOGGED_IN = loggedIn()
+
+  const items = [
+    getItem(<Link to='dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
+    getItem('Home', '2', <HomeOutlined />),
+    getItem('Settings', '3', <SettingOutlined />),
+    (LOGGED_IN[1] === 'administrator') && 
+      getItem(<Link to='author/authors'>Authors</Link>, 'sub1', <UserOutlined />, [
+        getItem(<Link to='author/createAuthor'>Create Author</Link>, '4'),
+      ]),
+    getItem(<Link to='blogs'>Blog Post</Link>, 'sub2', <FormOutlined />, [
+      getItem(<Link to='blog/newBlog'>New Blog</Link>, '5'),
+    ]),
+  ];
 
   return (
     <>
