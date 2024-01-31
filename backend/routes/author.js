@@ -16,7 +16,7 @@ router.get('/', [AUTH, ADMIN], async (req, res) => {
 })
 
 //get author by id
-router.get('/me', [AUTH, ADMIN], async (req, res) => {
+router.get('/:id', [AUTH, ADMIN], async (req, res) => {
     const AUTHOR = await AUTHOR_MODEL.findById(req.params.id)
     .select('-passsword')
 

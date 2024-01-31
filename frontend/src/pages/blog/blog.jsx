@@ -9,6 +9,7 @@ import { Space, Tag } from 'antd';
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
 import { loggedIn } from '../../utils/func';
+import LayoutComponent from '../../components/layoutComponent';
 
 
 const LOGGED_IN = loggedIn()
@@ -41,7 +42,7 @@ export default function Blog() {
   }, [setBlogData])
   
   return (
-    <>
+    <LayoutComponent>
         {
             (!blogData) ?
 
@@ -67,6 +68,6 @@ export default function Blog() {
                 </div>
             </>
         }
-    </>
+    </LayoutComponent>
   )
 }

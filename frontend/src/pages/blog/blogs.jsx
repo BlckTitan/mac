@@ -10,6 +10,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {baseUrl} from '../../constants';
 import Loading from '../../components/loading';
 import { loggedIn } from '../../utils/func';
+import LayoutComponent from '../../components/layoutComponent';
 
 const LOGGED_IN = loggedIn()
 
@@ -82,7 +83,7 @@ export default function Blogs() {
   if(!blogData) return <Loading/>
 
   return (
-    <>
+    <LayoutComponent>
 
       {
             (!blogData) ?
@@ -153,6 +154,6 @@ export default function Blogs() {
               />
               </>
         }
-    </>
+    </LayoutComponent>
   )
 }

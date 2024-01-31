@@ -7,6 +7,7 @@ import axios from 'axios'
 import { baseUrl } from '../../constants';
 import LoadingComponent from '../../components/loading';
 import { loggedIn } from '../../utils/func';
+import LayoutComponent from '../../components/layoutComponent';
 const { Option } = Select;
 
 export default function EditAuthor() {
@@ -87,7 +88,7 @@ export default function EditAuthor() {
     
 
   return (
-      <>
+      <LayoutComponent>
 
         {
             (!authorData) ?
@@ -225,6 +226,6 @@ export default function EditAuthor() {
             </Form>
           </>
         }
-    </>
+    </LayoutComponent>
   )
 }

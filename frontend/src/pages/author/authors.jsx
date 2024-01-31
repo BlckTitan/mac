@@ -10,6 +10,7 @@ import Loading from '../../components/loading';
 // constant variables
 import {baseUrl} from '../../constants';
 import { loggedIn } from '../../utils/func';
+import LayoutComponent from '../../components/layoutComponent';
 
 
 const LOGGED_IN = loggedIn()
@@ -122,7 +123,7 @@ export default function Authors() {
   if(!authorData) return <Loading/>
 
   return (
-    <>
+    <LayoutComponent>
 
       {
             (!authorData) ?
@@ -143,6 +144,6 @@ export default function Authors() {
               />
             </>
         }
-    </>
+    </LayoutComponent>
   )
 }

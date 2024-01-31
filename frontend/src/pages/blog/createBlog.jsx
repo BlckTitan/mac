@@ -6,6 +6,7 @@ import { Button, Form, Input,  } from 'antd';
 import axios from 'axios'
 import { baseUrl } from '../../constants';
 import { loggedIn } from '../../utils/func'
+import LayoutComponent from '../../components/layoutComponent';
 const { TextArea } = Input;
 
 
@@ -50,7 +51,7 @@ export default function CreateBlogPost() {
     }
 
   return (
-        <>
+        <LayoutComponent>
             <header className='mb-8'>
                 <h2 className='text-2xl font-semibold'>Create Blog Post</h2>
             </header>
@@ -148,6 +149,6 @@ export default function CreateBlogPost() {
                 </Form.Item>
 
             </Form>
-        </>
+        </LayoutComponent>
     )
 }

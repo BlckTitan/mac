@@ -9,6 +9,7 @@ import { baseUrl } from '../../constants';
 
 import { Button, Form, Input, Select } from 'antd';
 import { loggedIn } from '../../utils/func';
+import LayoutComponent from '../../components/layoutComponent';
 const { Option } = Select;
 
 
@@ -57,7 +58,7 @@ export default function CreateAuthor() {
     }, [])
 
   return (
-    <>
+    <LayoutComponent>
             <header className='mb-8'>
                 <h2 className='text-2xl font-semibold'>Create Blog Author</h2>
             </header>
@@ -186,6 +187,6 @@ export default function CreateAuthor() {
                 </Form.Item>
 
             </Form>
-        </>
+        </LayoutComponent>
   )
 }

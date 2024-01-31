@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loggedIn } from '../utils/func';
+import LayoutComponent from '../components/layoutComponent';
 
 
 
@@ -16,8 +17,8 @@ export default function Dashboard() {
   
   return (
     
-    <div>
+    <LayoutComponent>
       dashboard
-    </div>
+    </LayoutComponent>
   )
 }

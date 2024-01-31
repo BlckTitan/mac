@@ -7,6 +7,7 @@ import axios from 'axios'
 import { baseUrl } from '../../constants';
 import LoadingComponent from '../../components/loading';
 import { loggedIn } from '../../utils/func';
+import LayoutComponent from '../../components/layoutComponent';
 const { TextArea } = Input;
 
 
@@ -80,7 +81,7 @@ export default function EditBlogPost() {
     
 
   return (
-      <>
+      <LayoutComponent>
 
         {
             (!blogData) ?
@@ -187,6 +188,6 @@ export default function EditBlogPost() {
                 </Form>
           </>
         }
-    </>
+    </LayoutComponent>
   )
 }

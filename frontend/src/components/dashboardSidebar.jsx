@@ -16,8 +16,7 @@ function getItem(label, key, icon, children) {
 }
 
 
-
-
+const LOGGED_IN = loggedIn()
 
 export default function DashboardSidebar() {
 
@@ -30,18 +29,17 @@ export default function DashboardSidebar() {
     if(!LOGGED_IN) return navigate('/login')
   }, [])
 
-  const LOGGED_IN = loggedIn()
 
   const items = [
-    getItem(<Link to='dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
+    getItem(<Link to='/dashboard'>Dashboard</Link>, '1', <AppstoreOutlined />),
     getItem('Home', '2', <HomeOutlined />),
     getItem('Settings', '3', <SettingOutlined />),
-    (LOGGED_IN[1] === 'administrator') && 
-      getItem(<Link to='author/authors'>Authors</Link>, 'sub1', <UserOutlined />, [
-        getItem(<Link to='author/createAuthor'>Create Author</Link>, '4'),
+    (LOGGED_IN && LOGGED_IN[1] === 'administrator') && 
+      getItem(<Link to='/author/authors'>Authors</Link>, 'sub1', <UserOutlined />, [
+        getItem(<Link to='/author/createAuthor'>Create Author</Link>, '4'),
       ]),
-    getItem(<Link to='blogs'>Blog Post</Link>, 'sub2', <FormOutlined />, [
-      getItem(<Link to='blog/newBlog'>New Blog</Link>, '5'),
+    getItem(<Link to='/blogs'>Blog Post</Link>, 'sub2', <FormOutlined />, [
+      getItem(<Link to='/blog/newBlog'>New Blog</Link>, '5'),
     ]),
   ];
 
